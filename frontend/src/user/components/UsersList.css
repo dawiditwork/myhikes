@@ -1,0 +1,24 @@
+.users-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+.users-list__empty {
+  width: 100%;
+  text-align: center;
+}
+
+.users-list__empty-card {
+  padding: 2rem;
+}
+
+@media (max-width: 560px) {
+  .users-list {
+    grid-template-columns: 1fr;
+  }
+}

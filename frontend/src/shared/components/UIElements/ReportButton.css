@@ -1,0 +1,11 @@
+.report-button { padding: .3rem .55rem; border: 1px solid rgba(251,191,36,.28); border-radius: .5rem; background: transparent; color: #fcd34d; font: inherit; font-size: .78rem; cursor: pointer; }
+.report-modal .modal__header { background: #92400e; }
+.report-form { display: grid; gap: .85rem; color: #e2e8f0; text-align: left; }
+.report-form > p { color: #cbd5e1; }
+.report-form label { display: flex; flex-direction: column; gap: .35rem; font-weight: 700; }
+.report-form select, .report-form textarea { padding: .7rem; border: 1px solid rgba(255,255,255,.18); border-radius: .6rem; background: #10272e; color: #fff; font: inherit; }
+.report-form textarea { min-height: 6rem; resize: vertical; }
+.report-form > div { display: flex; justify-content: flex-end; gap: .6rem; }
+.report-form button { padding: .65rem .85rem; border: 1px solid rgba(255,255,255,.18); border-radius: .6rem; background: rgba(255,255,255,.07); color: #fff; font-weight: 700; cursor: pointer; }
+.report-form div button:last-child { border-color: #b45309; background: #92400e; }
+.report-form__error { padding: .55rem; border-radius: .5rem; background: rgba(159,18,57,.3); color: #fecdd3 !important; }

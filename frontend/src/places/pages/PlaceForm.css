@@ -1,0 +1,95 @@
+.place-form {
+  width: 100%;
+  max-width: 44rem;
+  padding: clamp(1.35rem, 3vw, 2rem);
+
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 1.2rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+
+  margin: 0; 
+
+  transition: transform 0.25s ease;
+}
+
+/* lekki hover efekt */
+.place-form:hover {
+  transform: translateY(-3px);
+}
+
+/* większe odstępy między elementami */
+.place-form .form-control {
+  margin-bottom: 1.2rem;
+}
+
+.place-form__section-title {
+  margin: 1.8rem 0 1rem;
+  padding-top: 1.3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  color: #5eead4;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.place-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.place-form .form-control select {
+  width: 100%;
+  min-height: 2.65rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 0.55rem;
+  background-color: rgba(2, 6, 23, 0.52) !important;
+  color: #f8fafc !important;
+  color-scheme: dark;
+  font: inherit;
+}
+
+.place-form .form-control select:focus {
+  border-color: #5eead4 !important;
+  outline: none;
+  background-color: rgba(2, 6, 23, 0.68) !important;
+  box-shadow: 0 0 0 3px rgba(94, 234, 212, 0.12);
+}
+
+.place-form .form-control--invalid select,
+.place-form .form-control--invalid select:focus {
+  border-color: #fb7185 !important;
+  background-color: rgba(76, 5, 25, 0.48) !important;
+  color: #f8fafc !important;
+}
+
+.place-form .form-control select option {
+  background: #0f232b;
+  color: #f8fafc;
+}
+
+/* responsywność */
+@media (min-width: 768px) {
+  .place-form {
+    margin-top: 3rem;
+    margin-bottom: 3rem;   /* 🔥 daje dystans od footera */
+  }
+}
+
+@media (max-width: 560px) {
+  .place-form__row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+.equipment-picker { margin: 1.2rem 0; padding: 1rem; border: 1px solid rgba(255,255,255,.18); border-radius: .9rem; color: #e2e8f0; }
+.equipment-picker legend { padding: 0 .4rem; color: #5eead4; font-weight: 800; }
+.equipment-picker > p { margin: 0 0 .8rem; color: #94a3b8; font-size: .9rem; }
+.equipment-picker > div { display: grid; grid-template-columns: repeat(2, 1fr); gap: .55rem; }
+.equipment-picker label { padding: .7rem; display: flex; align-items: center; gap: .55rem; border: 1px solid rgba(255,255,255,.14); border-radius: .7rem; background: rgba(255,255,255,.05); cursor: pointer; }
+.equipment-picker label.active { border-color: #2dd4bf; background: rgba(45,212,191,.14); }
+.equipment-picker label span { font-size: 1.2rem; }
+@media (max-width: 520px) { .equipment-picker > div { grid-template-columns: 1fr; } }

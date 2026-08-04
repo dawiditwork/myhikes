@@ -1,0 +1,7 @@
+backend/.env
+frontend/.env.local
+frontend/build/
+node_modules/
+.DS_Store
+backend/uploads/images/*
+!backend/uploads/images/.gitkeep

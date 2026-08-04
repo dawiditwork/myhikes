@@ -1,0 +1,7 @@
+.toast { position: fixed; top: 5.25rem; right: 1.25rem; z-index: 3000; width: min(24rem, calc(100vw - 2rem)); padding: .85rem 1rem; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .7rem; border: 1px solid rgba(94,234,212,.38); border-radius: .85rem; background: rgba(7,35,36,.96); color: #f8fafc; box-shadow: 0 16px 40px rgba(2,6,23,.42); backdrop-filter: blur(14px); animation: toast-in .2s ease-out; }
+.toast--error { border-color: rgba(251,113,133,.48); background: rgba(76,5,25,.96); }
+.toast > span { width: 1.7rem; height: 1.7rem; display: grid; place-items: center; border-radius: 50%; background: #0f766e; font-weight: 800; }
+.toast--error > span { background: #be123c; }
+.toast p { margin: 0; line-height: 1.4; }
+.toast button { border: 0; background: transparent; color: #cbd5e1; font-size: 1.35rem; cursor: pointer; }
+@keyframes toast-in { from { opacity: 0; transform: translateY(-.6rem); } }

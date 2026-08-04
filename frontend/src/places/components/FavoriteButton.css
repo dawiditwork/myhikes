@@ -1,0 +1,21 @@
+.favorite-button {
+  min-height: 2.5rem;
+  padding: 0.55rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 0.8rem;
+  background: rgba(255,255,255,.07);
+  color: #f8fafc;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.favorite-button:hover { border-color: rgba(251,113,133,.5); background: rgba(251,113,133,.1); transform: translateY(-1px); }
+.favorite-button--active { border-color: rgba(251,113,133,.65); background: rgba(190,18,60,.7); color: #fff; }
+.favorite-button:disabled { opacity: 0.6; cursor: wait; }
+.favorite-button span { font-size: 1.25rem; line-height: 1; }

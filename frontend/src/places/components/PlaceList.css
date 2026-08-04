@@ -1,0 +1,23 @@
+.place-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto;
+  width: 95%;
+  max-width: 1200px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .place-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .place-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

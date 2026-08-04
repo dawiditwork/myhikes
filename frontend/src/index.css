@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* 🔥 KLUCZ: flex layout robimy na #root */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* tło zostaje na body */
+body {
+  margin: 0;
+  background: #24323a url('/mountain-background.png') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.08),
+    rgba(15, 23, 42, 0.24)
+  );
+}
+
+/* main rozpycha stopkę na dół */
+main {
+   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+/* ---------------- Animacje ---------------- */
+.slide-in-left-enter {
+  transform: translateX(-100%);
+}
+
+.slide-in-left-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 200ms;
+}
+
+.slide-in-left-exit {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.slide-in-left-exit-active {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: all 200ms;
+}
+
+/* ---------------- Center helper ---------------- */
+.center {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ---------------- Cinematic (lightbox) ---------------- */
+body.cinematic .main-header {
+  transform: translateY(-120%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+body.cinematic {
+  overflow: hidden;
+}
+
+/* ---------------- Footer ---------------- */
+footer {
+  height: 3rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  main {
+    padding-top: 6rem;   /* 🔥 niżej na mobile */
+  }
+}
+
+/* ---------------- Global dark glass theme ---------------- */
+:root {
+  --glass-bg: rgba(7, 20, 28, 0.78);
+  --glass-bg-soft: rgba(15, 35, 43, 0.72);
+  --glass-card: rgba(255, 255, 255, 0.1);
+  --glass-card-hover: rgba(255, 255, 255, 0.16);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-text: #f8fafc;
+  --glass-muted: #cbd5e1;
+  --glass-accent: #5eead4;
+}
+
+.community-page,
+.explore__header,
+.explore__search,
+.explore__card,
+.explore__empty,
+.explore__no-results,
+.place-details__hero,
+.place-details__map-section,
+.place-reviews,
+.user-profile__hero,
+.user-profile__form,
+.user-profile__empty,
+.place-form,
+.card,
+.modal {
+  border: 1px solid var(--glass-border) !important;
+  background: var(--glass-bg) !important;
+  color: var(--glass-text) !important;
+  box-shadow: 0 18px 48px rgba(2, 6, 23, 0.34) !important;
+  backdrop-filter: blur(12px);
+}
+
+.place-item {
+  border-color: var(--glass-border) !important;
+  background: var(--glass-bg) !important;
+}
+
+.community-page h1,
+.community-page h2,
+.explore__header h1,
+.explore__card h2,
+.explore__empty h2,
+.explore__no-results h2,
+.place-item__info h2,
+.place-item__info h3,
+.place-details h1,
+.place-details h2,
+.place-reviews h2,
+.place-reviews strong,
+.user-profile h1,
+.user-profile h2,
+.user-profile__stats strong,
+.place-form label,
+.authentication label,
+.favorite-places__empty h2 {
+  color: var(--glass-text) !important;
+}
+
+.community-page p,
+.community-pagination,
+.explore__header p,
+.explore__description,
+.explore__meta,
+.explore__empty p,
+.explore__no-results,
+.explore__search-results,
+.place-item__info p,
+.place-details__description,
+.place-details__creator small,
+.place-reviews__score span,
+.place-reviews__login-note,
+.place-reviews__comments p,
+.user-profile__bio,
+.user-profile__stats span,
+.favorite-places__empty p {
+  color: var(--glass-muted) !important;
+}
+
+.community-page__header > div > span,
+.explore__eyebrow,
+.explore__card-label,
+.place-details__eyebrow,
+.place-reviews__heading > div:first-child > span,
+.user-profile__identity > span,
+.user-profile__places-heading span {
+  color: var(--glass-accent) !important;
+}
+
+.community-search,
+.place-reviews__rate,
+.place-reviews__comments > article,
+.user-profile__stats > div,
+.image-upload__preview-grid,
+.image-upload__preview,
+.favorite-button {
+  border-color: var(--glass-border) !important;
+  background: var(--glass-card) !important;
+  color: var(--glass-text) !important;
+}
+
+.community-search input,
+.explore__search input,
+.form-control input,
+.form-control textarea,
+.user-profile__form input,
+.user-profile__form textarea {
+  border-color: var(--glass-border) !important;
+  background: rgba(2, 6, 23, 0.35) !important;
+  color: var(--glass-text) !important;
+}
+
+.community-search input::placeholder,
+.explore__search input::placeholder,
+.form-control input::placeholder,
+.form-control textarea::placeholder,
+.user-profile__form input::placeholder,
+.user-profile__form textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+.form-control input:focus,
+.form-control textarea:focus,
+.user-profile__form input:focus,
+.user-profile__form textarea:focus {
+  border-color: var(--glass-accent) !important;
+  background: rgba(2, 6, 23, 0.5) !important;
+  outline: none;
+}
+
+.place-item__actions,
+.place-details__creator,
+.explore__creator {
+  border-color: var(--glass-border) !important;
+}
+
+.place-details__address,
+.explore__address,
+.explore__creator strong,
+.place-reviews__rate,
+.user-profile__form label {
+  color: var(--glass-text) !important;
+}
+
+.favorite-button--active {
+  border-color: #fb7185 !important;
+  background: #be123c !important;
+}
+
+.side-drawer,
+.main-navigation__drawer-nav {
+  background: rgba(7, 20, 28, 0.96) !important;
+  color: var(--glass-text) !important;
+}
+
+.side-drawer .nav-link {
+  color: var(--glass-text) !important;
+}
+
+/* Fullscreen galleries stay fully black instead of glass. */
+.modal--fullscreen,
+.modal--fullscreen .modal__content {
+  border: 0 !important;
+  background: #020617 !important;
+  box-shadow: none !important;
+  backdrop-filter: none;
+}

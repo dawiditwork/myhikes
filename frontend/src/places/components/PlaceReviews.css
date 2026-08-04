@@ -1,0 +1,24 @@
+.place-reviews { margin-top: 1.5rem; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid rgba(255,255,255,.7); border-radius: 1.35rem; background: rgba(255,255,255,.96); box-shadow: 0 18px 50px rgba(15,23,42,.2); color: #0f172a; }
+.place-reviews__heading { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.place-reviews__heading > div:first-child > span { color: #0f766e; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.place-reviews__heading h2 { margin-top: .3rem; }
+.place-reviews__score { display: flex; flex-direction: column; align-items: flex-end; }
+.place-reviews__score strong { color: #b45309; font-size: 2rem; }
+.place-reviews__score span { color: #64748b; font-size: .85rem; }
+.place-reviews__rate { margin: 1.5rem 0 1rem; padding: 1rem; display: flex; justify-content: space-between; align-items: center; border-radius: .8rem; background: #f8fafc; font-weight: 700; }
+.place-reviews__rate button { padding: .1rem; border: 0; background: none; color: #cbd5e1; font-size: 1.8rem; cursor: pointer; }
+.place-reviews__rate button.active, .place-reviews__rate button:hover { color: #f59e0b; }
+.place-reviews__form { margin: 1rem 0 1.5rem; display: flex; gap: .75rem; }
+.place-reviews__form textarea { min-height: 5rem; padding: .9rem; flex: 1; resize: vertical; border: 1px solid #cbd5e1; border-radius: .7rem; font: inherit; }
+.place-reviews__form button { padding: .7rem 1.2rem; border: 0; border-radius: .6rem; background: #0f766e; color: #fff; font-weight: 700; cursor: pointer; }
+.place-reviews__form button:disabled { opacity: .5; }
+.place-reviews__comments { display: grid; gap: .75rem; }
+.place-reviews__comments > article { position: relative; padding: 1rem; display: flex; gap: .85rem; border: 1px solid #e2e8f0; border-radius: .8rem; }
+.place-reviews__comments img { width: 2.7rem; height: 2.7rem; border-radius: 50%; object-fit: cover; }
+.place-reviews__comments article > div { flex: 1; min-width: 0; }
+.place-reviews__comments header { display: flex; gap: .75rem; align-items: baseline; }
+.place-reviews__comments time { color: #94a3b8; font-size: .78rem; }
+.place-reviews__comments p { margin-top: .4rem; color: #475569; line-height: 1.55; overflow-wrap: anywhere; }
+.place-reviews__delete { align-self: flex-start; border: 0; background: none; color: #be123c; cursor: pointer; }
+.place-reviews__login-note { margin: 1.25rem 0; color: #64748b; }
+@media (max-width: 600px) { .place-reviews__form { flex-direction: column; } .place-reviews__rate { align-items: flex-start; flex-direction: column; gap: .5rem; } }

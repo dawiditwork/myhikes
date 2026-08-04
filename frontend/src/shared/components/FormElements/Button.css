@@ -1,0 +1,70 @@
+.button {
+  font: inherit;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #2E8B57; /* forest dark */
+  border-radius: 0.5rem;
+  background: #3B7A57; /* forest green */
+  color: white;
+  cursor: pointer;
+  margin-right: 1rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s ease-in-out;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:hover,
+.button:active {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: #4CAF70; /* slightly brighter green */
+  border-color: #2E5631; /* darker green */
+}
+
+/* Inverse buttons (np. CANCEL) */
+.button--inverse {
+  background: transparent;
+  color: #3CAEA3;
+  border: 2px solid #3CAEA3;
+}
+
+.button--inverse:hover,
+.button--inverse:active {
+  color: white;
+  background: #3CAEA3;
+  border-color: #2E5631;
+}
+
+/* Danger buttons (np. DELETE) */
+.button--danger {
+  background: #830000;
+  border-color: #830000;
+}
+
+.button--danger:hover,
+.button--danger:active {
+  background: #f34343;
+  border-color: #a30000;
+}
+
+/* Disabled state */
+.button:disabled,
+.button:hover:disabled,
+.button:active:disabled {
+  background: #ccc;
+  color: #979797;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Size variants */
+.button--small {
+  font-size: 0.8rem;
+}
+
+.button--big {
+  font-size: 1.5rem;
+}

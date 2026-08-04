@@ -1,0 +1,110 @@
+.main-navigation__menu-btn {
+  width: 3rem;
+  height: 3rem;
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-right: 2rem;
+  cursor: pointer;
+}
+
+.main-navigation__menu-btn span {
+  display: block;
+  width: 3rem;
+  height: 2.5px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* ------------------ Title "MyHikes" ------------------ */
+.main-navigation__title {
+  font-family: 'Dancing Script', cursive; /* odręczny font */
+  font-size: 2.8rem;
+  color: white;
+  text-align: center;
+  margin: 0;
+  transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.main-navigation__title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Hover efekt */
+.main-navigation__title:hover {
+  transform: scale(1.15) rotate(-1deg);
+  text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* ------------------ Navigation ------------------ */
+.main-navigation__header-nav {
+  display: none;
+}
+
+.main-navigation__drawer-nav {
+  height: 100%;
+}
+
+/* ------------------ Responsywność ------------------ */
+@media (min-width: 768px) {
+  .main-navigation__menu-btn {
+    display: none;
+  }
+
+  .main-navigation__header-nav {
+    display: block;
+  }
+}
+/* ===== MOBILE DRAWER NAV FIX ===== */
+.main-navigation__drawer-nav {
+  position: fixed;
+  top: 4.5rem;                 /* wysokość headera */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 4.5rem);
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding-top: 2rem;           /* żeby ALL USERS było widać */
+  background: rgba(20, 40, 40, 0.96);
+  backdrop-filter: blur(10px);
+
+  z-index: 1001;               /* nad backdrop */
+  overflow-y: auto;            /* jak linków będzie dużo */
+}
+
+/* opcjonalnie: większe linki w drawerze */
+.main-navigation__drawer-nav .nav-links {
+  width: 100%;
+  max-width: 22rem;
+  padding: 0 1rem;
+}
+
+/* ===== HAMBURGER ANIMATION ===== */
+
+.main-navigation__menu-btn span {
+  transition: all 0.3s ease;
+}
+
+/* pierwsza kreska */
+.main-navigation__menu-btn.open span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+/* środkowa znika */
+.main-navigation__menu-btn.open span:nth-child(2) {
+  opacity: 0;
+}
+
+/* trzecia kreska */
+.main-navigation__menu-btn.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}

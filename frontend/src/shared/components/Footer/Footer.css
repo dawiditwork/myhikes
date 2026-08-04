@@ -1,0 +1,39 @@
+.footer {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+
+  /* 🔥 najważniejsze: NIE fixed */
+  position: relative;
+  z-index: 10;
+
+  font-family: 'Open Sans', sans-serif;
+  flex-shrink: 0; /* ważne przy flex layout body */
+}
+
+.footer__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer__links a {
+  display: inline-block;
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 0.5rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.footer__links a:hover {
+  transform: scale(1.1);
+  color: #3CAEA3; /* turkus jak appka */
+}
+
+.footer__links a:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}

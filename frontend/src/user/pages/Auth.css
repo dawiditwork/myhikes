@@ -1,0 +1,132 @@
+.authentication__header {
+  color: white;
+  text-align: center;
+}
+
+.authentication {
+  width: min(92%, 29rem);
+  margin: 5rem auto;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.26) !important;
+  border-radius: 1.5rem;
+  background: linear-gradient(
+    145deg,
+    rgba(7, 20, 28, 0.62),
+    rgba(15, 38, 43, 0.42)
+  ) !important;
+  box-shadow: 0 20px 55px rgba(2, 6, 23, 0.36) !important;
+  backdrop-filter: blur(14px) saturate(125%);
+  -webkit-backdrop-filter: blur(14px) saturate(125%);
+  text-align: center;
+}
+
+.authentication h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.65rem, 4vw, 2rem);
+  text-shadow: 0 2px 12px rgba(2, 6, 23, 0.45);
+}
+
+.authentication hr {
+  width: 3.5rem;
+  height: 3px;
+  margin: 0.8rem auto 1.8rem;
+  border: 0;
+  border-radius: 999px;
+  background: #5eead4;
+}
+
+.authentication form {
+  margin-bottom: 0.85rem;
+}
+
+.authentication__verification {
+  margin: 0 0 1.25rem;
+  padding: 1rem;
+  border: 1px solid rgba(94, 234, 212, 0.45);
+  border-radius: 0.85rem;
+  background: rgba(13, 148, 136, 0.14);
+  color: #e2e8f0;
+  text-align: left;
+}
+
+.authentication__verification strong { color: #5eead4; }
+.authentication__verification p { margin: 0.35rem 0 0; line-height: 1.45; }
+
+.authentication__resend {
+  margin-top: 1rem;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.authentication__resend:disabled { opacity: 0.55; cursor: wait; }
+
+.authentication .form-control {
+  margin: 0 0 1.15rem;
+  text-align: left;
+}
+
+.authentication .form-control label {
+  margin-bottom: 0.45rem;
+  color: #e2e8f0 !important;
+  font-size: 0.9rem;
+}
+
+.authentication .form-control input,
+.authentication .form-control textarea {
+  min-height: 3rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-radius: 0.75rem;
+  background: rgba(2, 6, 23, 0.28) !important;
+  transition: border-color 0.2s ease, background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.authentication .form-control input:focus,
+.authentication .form-control textarea:focus {
+  border-color: #5eead4 !important;
+  background: rgba(2, 6, 23, 0.42) !important;
+  box-shadow: 0 0 0 3px rgba(94, 234, 212, 0.14);
+}
+
+.authentication .button {
+  min-height: 2.8rem;
+  margin: 0;
+  border-radius: 0.75rem;
+  font-weight: 700;
+}
+
+.authentication form .button {
+  min-width: 8rem;
+  border-color: #0f766e;
+  background: #0f766e;
+}
+
+.authentication > .button--inverse {
+  width: 100%;
+  margin-top: 0.2rem;
+  border: 1px solid rgba(94, 234, 212, 0.75);
+  background: rgba(255, 255, 255, 0.06);
+  color: #5eead4;
+}
+
+.authentication > .button--inverse:hover,
+.authentication > .button--inverse:active {
+  border-color: #5eead4;
+  background: rgba(94, 234, 212, 0.15);
+  color: #fff;
+}
+
+@media (max-width: 620px) {
+  .authentication {
+    margin: 1rem auto;
+    padding: 1.5rem;
+    border-radius: 1.2rem;
+  }
+}
