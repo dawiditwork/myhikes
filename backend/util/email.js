@@ -127,6 +127,61 @@ const buildVerificationEmail = ({ name, verificationUrl }) => {
   return { subject, text, html };
 };
 
+const buildPasswordResetEmail = ({ name, resetUrl }) => {
+  const plainName = String(name || 'there')
+    .replace(/[\r\n]+/g, ' ')
+    .trim() || 'there';
+
+  const safeName = escapeHtml(plainName);
+  const safeUrl = escapeHtml(resetUrl);
+
+  const subject = 'Reset your MyHikes password';
+
+  const text = [
+    `Hi ${plainName},`,
+    '',
+    'We received a request to reset your MyHikes password.',
+    'Use the link below to choose a new password:',
+    resetUrl,
+    '',
+    'This link expires in 1 hour.',
+    'If you did not request a password reset, you can safely ignore this email.',
+    '',
+    'MyHikes - Find your next trail.'
+  ].join('\n');
+
+  const html = `
+    <!doctype html>
+    <html lang="en">
+      <body style="font-family:Arial,Helvetica,sans-serif;">
+        <h2>Reset your MyHikes password</h2>
+
+        <p>Hi <strong>${safeName}</strong>,</p>
+
+        <p>We received a request to reset your password.</p>
+
+        <p>
+          <a href="${safeUrl}">
+            Reset password
+          </a>
+        </p>
+
+        <p>This link expires in 1 hour.</p>
+
+        <p>
+          If you did not request a password reset,
+          you can safely ignore this email.
+        </p>
+
+        <p>${safeUrl}</p>
+      </body>
+    </html>
+  `;
+
+  return { subject, text, html };
+};
+
+
 const sendVerificationEmail = async ({ email, name, token }) => {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.EMAIL_FROM;
@@ -145,4 +200,40 @@ const sendVerificationEmail = async ({ email, name, token }) => {
   });
 };
 
-module.exports = { buildVerificationEmail, sendVerificationEmail };
+
+const sendPasswordResetEmail = async ({ email, name, token }) => {
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.EMAIL_FROM;
+
+  const clientUrl = (
+    process.env.CLIENT_URL || 'http://localhost:3000'
+  ).replace(/\/$/, '');
+
+  if (!apiKey || !from) {
+    throw new Error('Email delivery is not configured.');
+  }
+
+  const resetUrl =
+    `${clientUrl}/reset-password?token=${encodeURIComponent(token)}`;
+
+  const message = buildPasswordResetEmail({
+    name,
+    resetUrl
+  });
+
+  await postJson(
+    'api.resend.com',
+    '/emails',
+    {
+      Authorization: `Bearer ${apiKey}`
+    },
+    {
+      from,
+      to: [email],
+      ...message
+    }
+  );
+};
+
+
+module.exports = { buildVerificationEmail, sendVerificationEmail, buildPasswordResetEmail, sendPasswordResetEmail };

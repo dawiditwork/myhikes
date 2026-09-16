@@ -11,13 +11,31 @@ const User = require('../models/user');
 const Place = require('../models/place');
 const Report = require('../models/report');
 const Notification = require('../models/notification');
-const { sendVerificationEmail } = require('../util/email');
+const {
+  sendVerificationEmail,
+  sendPasswordResetEmail
+} = require('../util/email');
 const { uploadImage, deleteImage } = require('../config/cloudinary');
 
 const createEmailVerification = user => {
   const token = crypto.randomBytes(32).toString('hex');
   user.emailVerificationTokenHash = crypto.createHash('sha256').update(token).digest('hex');
   user.emailVerificationExpires = new Date(Date.now() + 24 * 60 * 60 * 1000);
+  return token;
+};
+
+const createPasswordReset = user => {
+  const token = crypto.randomBytes(32).toString('hex');
+
+  user.passwordResetTokenHash = crypto
+    .createHash('sha256')
+    .update(token)
+    .digest('hex');
+
+  user.passwordResetExpires = new Date(
+    Date.now() + 60 * 60 * 1000
+  );
+
   return token;
 };
 
@@ -473,6 +491,103 @@ const resendVerificationEmail = async (req, res, next) => {
   }
   res.json({ message: 'If an unverified account exists, a new verification email has been sent.' });
 };
+  
+
+const forgotPassword = async (req, res, next) => {
+  const email =
+    typeof req.body.email === 'string'
+      ? req.body.email.trim().toLowerCase()
+      : '';
+
+  if (!email) {
+    return next(new HttpError('Please enter a valid email address.', 422));
+  }
+
+  let user;
+
+  try {
+    user = await User.findOne({ email });
+  } catch (err) {
+    return next(
+      new HttpError('Password reset failed, please try again later.', 500)
+    );
+  }
+
+  // Nie zdradzamy, czy konto z takim adresem istnieje.
+  if (!user) {
+    return res.json({
+      message: 'If an account exists, a password reset email has been sent.'
+    });
+  }
+
+const token = createPasswordReset(user);
+
+try {
+  await user.save();
+
+  await sendPasswordResetEmail({
+    email: user.email,
+    name: user.name,
+    token
+  });
+} catch (err) {
+  console.error('ERROR SENDING PASSWORD RESET EMAIL:', err.message);
+
+  return next(
+    new HttpError(
+      'Password reset failed, please try again later.',
+      500
+    )
+  );
+}
+
+res.json({
+  message: 'If an account exists, a password reset email has been sent.'
+});
+};
+
+
+const resetPassword = async (req, res, next) => {
+  const token = req.body && typeof req.body.token === 'string' ? req.body.token : '';
+  const password = req.body && typeof req.body.password === 'string' ? req.body.password : '';
+
+  if (!validationResult(req).isEmpty() || !/^[a-f0-9]{64}$/i.test(token) || password.length < 8 || password.length > 128) {
+    return next(new HttpError('Invalid or expired password reset request.', 400));
+  }
+
+  const tokenHash = crypto.createHash('sha256').update(token).digest('hex');
+
+  try {
+    const user = await User.findOne({
+      passwordResetTokenHash: tokenHash,
+      passwordResetExpires: { $gt: new Date() }
+    }).select('+passwordResetTokenHash +passwordResetExpires');
+
+    if (!user) {
+      return next(new HttpError('This password reset link is invalid or has expired.', 400));
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+    // Consume the token atomically, rechecking expiry after the password hash.
+    // Only one concurrent request can change the password with this token.
+    const result = await User.updateOne({
+      _id: user._id,
+      passwordResetTokenHash: tokenHash,
+      passwordResetExpires: { $gt: new Date() }
+    }, {
+      $set: { password: hashedPassword },
+      $unset: { passwordResetTokenHash: '', passwordResetExpires: '' }
+    }, { runValidators: true });
+
+    if (result.modifiedCount !== 1) {
+      return next(new HttpError('This password reset link is invalid or has expired.', 400));
+    }
+  } catch (err) {
+    return next(new HttpError('Password reset failed, please try again later.', 500));
+  }
+
+  res.json({ message: 'Password reset successfully. You can now log in.' });
+};
 
 const login = async (req, res, next) => {
   const email = typeof req.body.email === 'string' ? req.body.email.trim().toLowerCase() : '';
@@ -762,3 +877,5 @@ exports.backfillCreatorCompletions = backfillCreatorCompletions;
 exports.getAccountSettings = getAccountSettings;
 exports.updateAccountSettings = updateAccountSettings;
 exports.changePassword = changePassword;
+exports.forgotPassword = forgotPassword;
+exports.resetPassword = resetPassword;

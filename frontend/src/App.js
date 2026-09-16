@@ -15,6 +15,7 @@ import ExplorePlaces from './places/pages/ExplorePlaces';
 import PlaceDetails from './places/pages/PlaceDetails';
 import FavoritePlaces from './places/pages/FavoritePlaces';
 import Auth from './user/pages/Auth';
+import PasswordRecovery from './user/pages/PasswordRecovery';
 import VerifyEmail from './user/pages/VerifyEmail';
 import UserProfile from './user/pages/UserProfile';
 import AccountSettings from './user/pages/AccountSettings';
@@ -38,6 +39,12 @@ const App = () => {
   if (token) {
     routes = (
       <Switch>
+        <Route path="/forgot-password" exact>
+          <PasswordRecovery key="forgot-password" />
+        </Route>
+        <Route path="/reset-password" exact render={({ location }) => (
+          <PasswordRecovery key={location.search} reset />
+        )} />
         <Route path="/" exact>
           <Users />
         </Route>
@@ -94,6 +101,12 @@ const App = () => {
   } else {
     routes = (
       <Switch>
+        <Route path="/forgot-password" exact>
+          <PasswordRecovery key="forgot-password" />
+        </Route>
+        <Route path="/reset-password" exact render={({ location }) => (
+          <PasswordRecovery key={location.search} reset />
+        )} />
         <Route path="/" exact>
           <Users />
         </Route>

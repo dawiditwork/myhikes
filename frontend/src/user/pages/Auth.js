@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import Card from '../../shared/components/UIElements/Card';
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
@@ -175,6 +177,9 @@ const Auth = () => {
             {isLoginMode ? 'LOGIN' : 'SIGNUP'}
           </Button>
         </form>
+        {isLoginMode && (
+          <p><Link className="authentication__resend" to="/forgot-password">Forgot your password?</Link></p>
+        )}
         <Button inverse onClick={switchModeHandler}>
           SWITCH TO {isLoginMode ? 'SIGNUP' : 'LOGIN'}
         </Button>

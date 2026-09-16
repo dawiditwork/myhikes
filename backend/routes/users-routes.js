@@ -16,7 +16,11 @@ router.param('lid', validateObjectId('trail log id'));
 const signupLimit = rateLimit({ windowMs: 60 * 60 * 1000, max: 5, message: 'Too many accounts were created. Please try again later.' });
 const loginLimit = rateLimit({ windowMs: 15 * 60 * 1000, max: 10, message: 'Too many login attempts. Please try again in 15 minutes.' });
 const verificationLimit = rateLimit({ windowMs: 60 * 60 * 1000, max: 5, message: 'Too many verification emails requested. Please try again later.' });
-
+const passwordResetLimit = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 5,
+  message: 'Too many password reset requests. Please try again later.'
+});
 router.get('/', usersController.getUsers);
 router.get('/:uid/profile', optionalAuth, usersController.getUserProfile);
 
@@ -37,12 +41,28 @@ router.post(
 );
 
 router.post('/login', loginLimit, usersController.login);
+router.post(
+  '/forgot-password',
+  passwordResetLimit,
+  [check('email').normalizeEmail().isEmail()],
+  usersController.forgotPassword
+);
 router.get('/verify-email', usersController.verifyEmail);
 router.post(
   '/resend-verification',
   verificationLimit,
   [check('email').normalizeEmail().isEmail()],
   usersController.resendVerificationEmail
+);
+
+router.post(
+  '/reset-password',
+  rateLimit({ windowMs: 15 * 60 * 1000, max: 10, message: 'Too many password reset attempts. Please try again in 15 minutes.' }),
+  [
+    check('token').isString().bail().matches(/^[a-f0-9]{64}$/i),
+    check('password').isString().bail().isLength({ min: 8, max: 128 })
+  ],
+  usersController.resetPassword
 );
 
 router.use(checkAuth);

@@ -130,3 +130,7 @@
     border-radius: 1.2rem;
   }
 }
+
+.password-recovery__intro { color: #e2e8f0; line-height: 1.5; }
+.password-recovery__error { color: #fecaca; text-align: left; line-height: 1.5; }
+.password-recovery input { color: #fff; }

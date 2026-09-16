@@ -47,6 +47,9 @@ const userSchema = new Schema({
   emailVerificationTokenHash: { type: String, select: false },
   emailVerificationExpires: { type: Date, select: false },
 
+  passwordResetTokenHash: { type: String, select: false },
+ passwordResetExpires: { type: Date, select: false },
+
   places: [
     {
       type: mongoose.Types.ObjectId,
