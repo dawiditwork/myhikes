@@ -371,7 +371,7 @@ const updatePlace = async (req, res, next) => {
   }
 
   if (place.creator.toString() !== req.userData.userId) {
-    return next(new HttpError('You are not allowed to edit this place.', 401));
+    return next(new HttpError('You are not allowed to edit this place.', 403));
   }
 
   place.title = title;
@@ -410,7 +410,7 @@ const deletePlace = async (req, res, next) => {
   }
 
   if (!place.creator || place.creator.id !== req.userData.userId) {
-    return next(new HttpError('You are not allowed to delete this place.', 401));
+    return next(new HttpError('You are not allowed to delete this place.', 403));
   }
 
   const imagePaths = Array.isArray(place.images) ? place.images : [];
