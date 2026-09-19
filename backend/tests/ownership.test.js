@@ -52,3 +52,41 @@ test('deletePlace returns 403 when authenticated user is not the owner', async (
     'You are not allowed to delete this place.'
   );
 });
+
+test('updatePlace returns 403 when authenticated user is not the owner', async () => {
+  const ownerId = '507f1f77bcf86cd799439011';
+  const otherUserId = '507f1f77bcf86cd799439012';
+
+  const fakePlace = {
+    creator: ownerId
+  };
+
+  Place.findById = async () => fakePlace;
+
+  const req = {
+    params: {
+      pid: '507f1f77bcf86cd799439013'
+    },
+    userData: {
+      userId: otherUserId
+    },
+    body: {}
+  };
+
+  const res = {};
+
+  let capturedError;
+
+  const next = error => {
+    capturedError = error;
+  };
+
+  await placesControllers.updatePlace(req, res, next);
+
+  assert.ok(capturedError);
+  assert.equal(capturedError.code, 403);
+  assert.equal(
+    capturedError.message,
+    'You are not allowed to edit this place.'
+  );
+});
