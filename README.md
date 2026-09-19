@@ -1,5 +1,7 @@
 # MyHikes
 
+![Backend Tests](https://github.com/dawiditwork/myhikes/actions/workflows/backend-tests.yml/badge.svg)
+
 A full-stack community platform for discovering, sharing and exploring hiking locations.
 
 [Live Demo](https://myhikes.dawidfrankowicz.com/) · [GitHub Repository](https://github.com/dawiditwork/myhikes)
@@ -46,6 +48,17 @@ Users can browse hikes on an interactive map, search for locations, filter trail
 - Express Validator
 - Multer
 - Cloudinary
+
+
+## Testing & CI
+
+The backend includes automated tests covering authentication, password reset flows, validation, rate limiting, security headers and API behavior.
+
+- Node.js Test Runner
+- Supertest
+- Automated API integration tests
+- GitHub Actions CI
+- Tests run automatically on push and pull requests
 
 ## Project Structure
 
