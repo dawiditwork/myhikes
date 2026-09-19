@@ -26,6 +26,7 @@ Users can browse hikes on an interactive map, search for locations, filter trail
 - User authentication
 - Image uploads and cloud storage
 - Responsive interface for desktop and mobile
+- Automated backend testing and CI with GitHub Actions
 
 ## Technology Stack
 
@@ -52,13 +53,21 @@ Users can browse hikes on an interactive map, search for locations, filter trail
 
 ## Testing & CI
 
-The backend includes automated tests covering authentication, password reset flows, validation, rate limiting, security headers and API behavior.
+The backend includes automated tests for API behavior, authentication, authorization, validation and security-sensitive flows.
 
-- Node.js Test Runner
-- Supertest
-- Automated API integration tests
-- GitHub Actions CI
-- Tests run automatically on push and pull requests
+Current test coverage includes:
+
+- authentication middleware
+- password reset flow
+- input validation
+- rate limiting
+- API security headers
+- ownership authorization for editing and deleting hikes
+- comment ownership authorization
+
+Tests are executed automatically with GitHub Actions on every push and pull request.
+
+**Testing stack:** Node.js Test Runner, Supertest, GitHub Actions
 
 ## Project Structure
 
