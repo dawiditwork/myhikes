@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "scripts": {
-    "test": "node --test tests/*.test.js",
-    "start": "node app.js",
-    "dev": "nodemon app.js",
-    "migrate:images": "node scripts/migrate-images-to-cloudinary.js"
-  },
+"scripts": {
+  "test": "node --test tests/*.test.js",
+  "test:coverage": "node --test --experimental-test-coverage tests/*.test.js",
+  "start": "node app.js",
+  "dev": "nodemon app.js",
+  "migrate:images": "node scripts/migrate-images-to-cloudinary.js"
+},
   "engines": {
     "node": "22.x"
   },
