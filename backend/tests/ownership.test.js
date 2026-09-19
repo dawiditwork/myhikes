@@ -90,3 +90,46 @@ test('updatePlace returns 403 when authenticated user is not the owner', async (
     'You are not allowed to edit this place.'
   );
 });
+test('deleteComment returns 403 when authenticated user is not the comment author', async () => {
+  const commentAuthorId = '507f1f77bcf86cd799439011';
+  const otherUserId = '507f1f77bcf86cd799439012';
+
+  const fakeComment = {
+    author: commentAuthorId
+  };
+
+  const fakePlace = {
+    comments: {
+      id: () => fakeComment
+    }
+  };
+
+  Place.findById = async () => fakePlace;
+
+  const req = {
+    params: {
+      pid: '507f1f77bcf86cd799439013',
+      cid: '507f1f77bcf86cd799439014'
+    },
+    userData: {
+      userId: otherUserId
+    }
+  };
+
+  const res = {};
+
+  let capturedError;
+
+  const next = error => {
+    capturedError = error;
+  };
+
+  await placesControllers.deleteComment(req, res, next);
+
+  assert.ok(capturedError);
+  assert.equal(capturedError.code, 403);
+  assert.equal(
+    capturedError.message,
+    'You can only delete your own comments.'
+  );
+});
